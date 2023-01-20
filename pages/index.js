@@ -33,27 +33,11 @@ export default function Home() {
   // If final age is greater than upperage, push the difference to arrray 
   // Add on to the array the values for ages where money is no longer being invested
   if (finalAge > upperAge) {
-    console.log('b')
-    console.log('final')
-    console.log('finalAge',finalAge)
-    console.log('upperAge',upperAge)
-    console.log('entering foreach')
     for (let i = upperAge; i < finalAge; i++){
-      console.log('inside for')
-      console.log('finalAge',finalAge)
-      console.log('upperAge',upperAge)
-      console.log('arr')
-      console.log('i', i)
-      console.log('amountPerYear[i - 1]', amountPerYear[i - 20])
-      console.log('amountPerYear[i - 1]', amountPerYear)
-      console.log('interestRate', interestRate)
       const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRate + 1) : 0
-      console.log('previousYearAmtPlusInterest', previousYearAmtPlusInterest)
-      console.log(amountPerYear)
       const amount = previousYearAmtPlusInterest; 
   
       amountPerYear.push( amount )
-
     }
     
   }
@@ -129,7 +113,7 @@ export default function Home() {
             <div>{interestRate}</div>
           </div>
 
-          <div>Total amount earned by age {finalAge}: {Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
+          <div className="bg-slate-200 text-black p-1">Total amount earned by age {finalAge}: ${Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
 
           <div className="columns-3">
             Amount per year: {
