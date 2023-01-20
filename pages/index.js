@@ -8,11 +8,12 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const [dollarsPerMonth, setDollarsPerMonth] = useState(0)
+  const [dollarsPerMonth, setDollarsPerMonth] = useState(200)
   const [interestRate, setInterestRate] = useState(0)
+  const [interestRatePercentage, setInterestRatePercentage] = useState(12)
   const [yearsInvested, setYearsInvested] = useState(0)
-  const [lowerAge, setLowerAge] = useState(0)
-  const [upperAge, setUpperAge] = useState(0)
+  const [lowerAge, setLowerAge] = useState(30)
+  const [upperAge, setUpperAge] = useState(65)
   const [finalAmount, setFinalAmount] = useState(0)
 
   useEffect(() => {
@@ -27,9 +28,9 @@ export default function Home() {
   const amountPerYear = []
   for (let i = 0; i < 20; i++){
     console.log('dollars', dollarsPerMonth, 'amount:', amountPerYear, 'interest', interestRate, 'i: ', i)
-
-    
-    amountPerYear.push(dollarsPerMonth * 12 + (amountPerYear.length > 0 && amountPerYear[i - 1] * (interestRate+1)) )
+    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
+    const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
+    amountPerYear.push( Math.floor(amount) )
     console.log(amountPerYear)
   }
 
@@ -48,7 +49,8 @@ export default function Home() {
           <div>
             <label>
               Amount invested every month: 
-              <input  
+              <input 
+                value={dollarsPerMonth}
                 onChange={(e) => {
                   setDollarsPerMonth(e.target.value)
                 }}
@@ -60,7 +62,9 @@ export default function Home() {
             <label>
               Interest rate (%):
               <input  
+                value={interestRatePercentage}
                 onChange={(e) => {
+                  setInterestRatePercentage(e.target.value)
                   setInterestRate(e.target.value / 100)
                 }}
               />
@@ -71,6 +75,7 @@ export default function Home() {
             <label>
               Age range invested: from 
               <input  
+                value={lowerAge}
                 onChange={(e) => {
                   setLowerAge(e.target.value)
                   setYearsInvested(upperAge - lowerAge)
@@ -78,6 +83,7 @@ export default function Home() {
               />
               to 
               <input  
+                value={upperAge}
                 onChange={(e) => {
                   setUpperAge(e.target.value)
                 }}
