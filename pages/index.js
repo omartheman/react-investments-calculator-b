@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
-import NumberInput from '/components/Input'
+import NumberInput from '/components/NumberInput'
  
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +20,8 @@ export default function Home() {
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
-  }, [upperAge, lowerAge, dollarsPerMonth, interestRate, yearsInvested])
+    setInterestRate(interestRatePercentage / 100)
+  }, [upperAge, lowerAge, interestRatePercentage])
 
   const amountPerYear = []
   for (let i = 0; i < yearsInvested; i++){
@@ -57,26 +58,22 @@ export default function Home() {
           <h1>Investment Calculator</h1>
 
           <NumberInput 
+            labelValue={'Amount invested every month: '}
             defaultValue={dollarsPerMonth}
-            labelValue={"Amount invested every month: "}
             changeEventHandler={setDollarsPerMonth}
             displayValue={dollarsPerMonth}
           />
 
-          <div>
-            <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
-            <label>
-              Interest rate (%):
-              <input  
-                value={interestRatePercentage}
-                onChange={(e) => {
-                  setInterestRatePercentage(Number(e.target.value))
-                  setInterestRate(Number(e.target.value) / 100)
-                }}
-              />
-            </label>
-            <div>{interestRate}</div>
-          </div>
+          <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
+
+
+          <NumberInput
+            labelValue={'Interest rate (%): '}
+            defaultValue={interestRatePercentage}
+            changeEventHandler={setInterestRatePercentage}
+            displayValue={interestRate}
+          />
+          
           <div>
             <label>
               I&apos;m investing from age{' '} 

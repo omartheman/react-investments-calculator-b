@@ -1,4 +1,4 @@
-export default function Input({labelValue, defaultValue, changeEventHandler, displayValue}){
+export default function NumberInput({labelValue, defaultValue, changeEventHandler, displayValue}){
   return (
     <div>
       <label>
