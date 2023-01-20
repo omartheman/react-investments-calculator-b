@@ -86,36 +86,7 @@ export default function Home() {
           <h1 className="text-center text-2xl mb-4 font-light">Investment Calculator</h1>
           <p className="font-extralight text-lg">Calculate the future value of a monthly investment you make for a number of years.</p>
 
-
-        <VictoryChart domainPadding={30}>
-          <VictoryAxis
-            dependentAxis={true}
-            style={{
-              grid: { stroke: "grey" }
-            }}
-          />
-          <VictoryAxis />
-          <VictoryBar
-            barWidth={20}
-            style={{ data: { fill: "red" } }}
-            data={[
-              { x: new Date("2019-01-01"), y: 2 },
-              { x: new Date("2019-02-01"), y: 3 },
-              { x: new Date("2019-03-01"), y: 5 },
-              { x: new Date("2019-04-01"), y: 4 },
-              { x: new Date("2019-05-01"), y: 8 },
-              { x: new Date("2019-06-01"), y: 2 },
-              { x: new Date("2019-07-01"), y: 3 },
-              { x: new Date("2019-08-01"), y: 5 },
-              { x: new Date("2019-09-01"), y: 9 },
-              { x: new Date("2019-10-01"), y: 3 },
-              { x: new Date("2019-11-01"), y: 5 },
-              { x: new Date("2019-12-01"), y: 6 }
-            ]}
-          />
-        </VictoryChart>
-
-          <VictoryChart domainPadding={30}>
+          <VictoryChart domainPadding={15}>
             <VictoryAxis 
               dependentAxis={true} 
               style={{ 
