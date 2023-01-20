@@ -58,44 +58,37 @@ export default function Home() {
 
         <div>
           <h1 className="text-center text-2xl mb-4">Investment Calculator</h1>
+          <p>Calculate the future value of a monthly investment you make for a number of years.</p>
 
           <NumberInput 
-            labelValue={'I\'m going to invest this much every month: '}
+            labelValue={'Monthly investment ($): '}
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
             inputStyles={inputStyles}
           />
 
           <NumberInput
-            labelValue={'Interest rate (%): '}
+            labelValue={'Average interest rate (%): '}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
             inputStyles={inputStyles}
           />
-          <div className="mt-2">(The average rate of return of the S&P 500 is ~11.8%)</div>
+          <div className="mt-2 text-center">(The average rate of return of the S&P 500 is ~11.8%)</div>
 
-          <div className="mt-4">
-            <label>
-              I&apos;m investing from age{' '} 
-              <input  
-                className={inputStyles}
-                value={lowerAge}
-                onChange={(e) => {
-                  setLowerAge(Number(e.target.value))
-                  setYearsInvested(upperAge - lowerAge)
-                }}
-              />
-              {' '}to age{' '}
-              <input  
-                className={inputStyles}
-                value={upperAge}
-                onChange={(e) => {
-                  setUpperAge(Number(e.target.value))
-                }}
-              />,
-            </label>
-            <div>which makes {yearsInvested} years of investing.</div>
-          </div>
+          <NumberInput
+            labelValue={'Start age:'}
+            defaultValue={lowerAge}
+            changeEventHandler={setLowerAge}
+            inputStyles={inputStyles}
+          />
+
+          <NumberInput
+            labelValue={'End age:'}
+            defaultValue={upperAge}
+            changeEventHandler={setUpperAge}
+            inputStyles={inputStyles}
+          />
+          <div className="text-center">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
 
           <NumberInput
             labelValue={'Show amounts until age: '}
@@ -130,8 +123,8 @@ export default function Home() {
                       </div>
 
                       {/* Total Amount Saved So Far */}
-                      <div className="underline">
-                        ${currentYearDisplayAmount}
+                      <div className="underline bg-purple-200 w-fit text-black rounded-md px-4 mb-2">
+                        ${currentYearDisplayAmount} total
                       </div>
 
                       {/* Breakdown of additions to get to total amount saved */}
