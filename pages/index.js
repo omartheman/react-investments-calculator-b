@@ -19,15 +19,18 @@ export default function Home() {
   const [finalAge, setFinalAge] = useState(65)
   const amountPerYear = []
   const [finalAmount, setFinalAmount] = useState(amountPerYear[amountPerYear.length - 1])
-
-  const inputStyles = "bg-slate-800 text-white p-2 rounded-md"
+  const [taxRateDecimal, setTaxRateDecimal] = useState(0.3)
+  const [taxRatePercentage, setTaxRatePercentage] = useState(30) 
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
     setInterestRate(interestRatePercentage / 100)
     setFinalAmount(amountPerYear[amountPerYear.length - 1])
 
-  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge])
+    // Update tax rate 
+    setTaxRateDecimal(taxRatePercentage / 100)
+
+  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage])
 
   for (let i = 0; i < yearsInvested; i++){
 
@@ -66,7 +69,6 @@ export default function Home() {
             labelValue={'Monthly investment ($): '}
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
-            inputStyles={inputStyles}
             inputName={'monthly-investment'}
           />
 
@@ -75,7 +77,6 @@ export default function Home() {
             subheading={'(The average rate of return of the S&P 500 is ~11.8%)'}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
-            inputStyles={inputStyles}
             inputName={'interest-rate'}
           />
 
@@ -83,7 +84,6 @@ export default function Home() {
             labelValue={'Start age:'}
             defaultValue={lowerAge}
             changeEventHandler={setLowerAge}
-            inputStyles={inputStyles}
             inputName={'start-age'}
           />
 
@@ -91,7 +91,6 @@ export default function Home() {
             labelValue={'End age:'}
             defaultValue={upperAge}
             changeEventHandler={setUpperAge}
-            inputStyles={inputStyles}
             inputName={'end-age'}
           />
           <div className="text-center font-extralight mt-6 text-lg">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
@@ -100,7 +99,6 @@ export default function Home() {
             labelValue={'Age I start withdrawing: '}
             defaultValue={finalAge}
             changeEventHandler={setFinalAge}
-            inputStyles={inputStyles}
             inputName={'final-age'}
           /> 
 
@@ -112,7 +110,19 @@ export default function Home() {
             /> 
             <FinalAmount 
               amount={finalAmount*interestRateDecimal}
-              text={`The amount of interest I earn on this at ${interestRatePercentage}% every year is: `}
+              text={`My annual income at ${interestRatePercentage}% per year of this total is: `}
+            /> 
+
+            <NumberInput
+              labelValue={'Amount of taxes I will pay on my investment when I withdraw:'}
+              defaultValue={taxRatePercentage}
+              changeEventHandler={setTaxRatePercentage}
+              inputName={'final-age'}
+            /> 
+
+            <FinalAmount 
+              amount={finalAmount*interestRateDecimal * (1 - taxRateDecimal)}
+              text={`After ${taxRateDecimal * 100}% to taxes, I am taking home:`}
             /> 
             <FinalAmount 
               amount={finalAmount*interestRateDecimal / 12}
