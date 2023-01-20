@@ -128,6 +128,21 @@ export default function Home() {
             }
           </div>
         </div>
+        <div>
+          <h2 className="text-center">Some Tips</h2>
+          <ul className="list-disc">
+            <li>
+              <div>
+                <p>
+                  Investing $200 a month from age 30 to age 40 will yield about $715k by age 65. This amount of money will earn an average of $85k per year at 12% (the market average rate of return). 
+                </p>
+                <p className="mt-4">
+                  That means you will have an income of $85k every year minus taxes. If we subtract 30%, that leaves ${Math.floor(85 * 0.7)}k. You would never have to work or invest again, and you will be able to pull out ${Math.floor(85 * 0.7)}k every year for the rest of your life. Even if you were to live to 1,000,000 years old.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </main>
     </>
   )
