@@ -56,11 +56,8 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} p-6`}>
 
-
         <div>
           <h1 className="text-center text-2xl mb-4">Investment Calculator</h1>
-
-          <button className="bg-slate-100 text-black p-1">Some Tips</button>
 
           <NumberInput 
             labelValue={'I\'m going to invest this much every month: '}
