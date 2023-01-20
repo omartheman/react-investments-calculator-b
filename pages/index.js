@@ -109,7 +109,7 @@ export default function Home() {
               amountPerYear.map((value, index) => {
                 return(
                   <>
-                    <div>
+                    <div className="mb-2">
                       <div>
                         Year {index + 1}, age {Number(lowerAge) + index + 1}:
                       </div>
