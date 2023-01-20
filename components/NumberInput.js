@@ -4,6 +4,7 @@ export default function NumberInput({labelValue, defaultValue, changeEventHandle
       <label>
         {labelValue}
         <input 
+          className="bg-slate-800 text-white"
           value={defaultValue}
           onChange={(e) => {
             changeEventHandler(Number(e.target.value))
