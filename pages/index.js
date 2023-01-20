@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
 
   const [dollarsPerMonth, setDollarsPerMonth] = useState(200)
-  const [interestRate, setInterestRate] = useState(0)
   const [interestRatePercentage, setInterestRatePercentage] = useState(12)
+  const [interestRate, setInterestRate] = useState(interestRatePercentage / 100)
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(65)
@@ -28,8 +28,10 @@ export default function Home() {
   const amountPerYear = []
   for (let i = 0; i < yearsInvested; i++){
     console.log('dollars', dollarsPerMonth, 'amount:', amountPerYear, 'interest', interestRate, 'i: ', i)
+
     const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
+
     amountPerYear.push( Math.floor(amount) )
     console.log(amountPerYear)
   }
@@ -94,7 +96,7 @@ export default function Home() {
           <div>
             Amount of money at end: {finalAmount}
           </div>
-          <div>
+          <div className="columns-3">
             Amount per year: {
               amountPerYear.map((value, index) => {
                 return(
