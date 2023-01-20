@@ -26,7 +26,7 @@ export default function Home() {
   }, [upperAge, lowerAge, dollarsPerMonth, interestRate, yearsInvested])
 
   const amountPerYear = []
-  for (let i = 0; i < 20; i++){
+  for (let i = 0; i < yearsInvested; i++){
     console.log('dollars', dollarsPerMonth, 'amount:', amountPerYear, 'interest', interestRate, 'i: ', i)
     const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
