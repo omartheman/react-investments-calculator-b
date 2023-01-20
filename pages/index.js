@@ -44,9 +44,7 @@ export default function Home() {
   
       amountPerYear.push( amount )
     }
-    
   }
-
 
   return (
     <>
@@ -139,26 +137,31 @@ export default function Home() {
                       {/* Breakdown of additions to get to total amount saved */}
                       {index > 0 && 
                         <>
-                          <p>
-                            ${amountInvestedThisYear.toLocaleString()} invested this year
-                          </p>
-                          <p>
-                            + previous year&apos;s amount of ${previousYearAmount.toLocaleString()}
-                          </p>
-                          <p>
-                            + interest on previous year&apos;s amount. That&apos;s {interestRatePercentage}% of ${previousYearAmount.toLocaleString()}, which is ${interestAmountOnPreviousYear.toLocaleString()}
-                          </p>
-                          <p>
-                            {/* Calculate sum of investments up to this point & display to user  */}
-                            ${amountInvestedThisYear.toLocaleString()} + ${previousYearAmount.toLocaleString()} + ${interestAmountOnPreviousYear.toLocaleString()} = ${
-                              (
-                                amountInvestedThisYear 
-                                + previousYearAmount
-                                + interestAmountOnPreviousYear
-                              )
-                              .toLocaleString()
-                            }
-                          </p>
+                          <div>
+                            <p className={`${index < yearsInvested ?
+                                "bg-green-300 text-black"
+                                : "bg-blue-200 text-black"
+                            } rounded-md px-2 w-fit`}>
+                              ${amountInvestedThisYear.toLocaleString()} invested this year
+                            </p>
+                            <p>
+                              + previous year&apos;s amount of ${previousYearAmount.toLocaleString()}
+                            </p>
+                            <p>
+                              + interest on previous year&apos;s amount. That&apos;s {interestRatePercentage}% of ${previousYearAmount.toLocaleString()}, which is ${interestAmountOnPreviousYear.toLocaleString()}
+                            </p>
+                            <p>
+                              {/* Calculate sum of investments up to this point & display to user  */}
+                              <span></span>${amountInvestedThisYear.toLocaleString()} + ${previousYearAmount.toLocaleString()} + ${interestAmountOnPreviousYear.toLocaleString()} = ${
+                                (
+                                  amountInvestedThisYear 
+                                  + previousYearAmount
+                                  + interestAmountOnPreviousYear
+                                )
+                                .toLocaleString()
+                              }
+                            </p>
+                          </div>
                         </>
                       }
                     </div>
