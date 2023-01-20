@@ -14,26 +14,48 @@ export default function Home() {
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(65)
-  const [finalAmount, setFinalAmount] = useState(0)
+
+  const [finalAge, setFinalAge] = useState(70)
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
-
-    // Calculate final amount
-    setFinalAmount(() => (
-      yearsInvested * interestRate
-    ))
   }, [upperAge, lowerAge, dollarsPerMonth, interestRate, yearsInvested])
 
   const amountPerYear = []
   for (let i = 0; i < yearsInvested; i++){
-    console.log('dollars', dollarsPerMonth, 'amount:', amountPerYear, 'interest', interestRate, 'i: ', i)
 
     const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
 
-    amountPerYear.push( Math.floor(amount) )
-    console.log(amountPerYear)
+    amountPerYear.push( amount )
+  }
+  
+  // If final age is greater than upperage, push the difference to arrray 
+  // Add on to the array the values for ages where money is no longer being invested
+  if (finalAge > upperAge) {
+    console.log('b')
+    console.log('final')
+    console.log('finalAge',finalAge)
+    console.log('upperAge',upperAge)
+    console.log('entering foreach')
+    for (let i = upperAge; i < finalAge; i++){
+      console.log('inside for')
+      console.log('finalAge',finalAge)
+      console.log('upperAge',upperAge)
+      console.log('arr')
+      console.log('i', i)
+      console.log('amountPerYear[i - 1]', amountPerYear[i - 20])
+      console.log('amountPerYear[i - 1]', amountPerYear)
+      console.log('interestRate', interestRate)
+      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRate + 1) : 0
+      console.log('previousYearAmtPlusInterest', previousYearAmtPlusInterest)
+      console.log(amountPerYear)
+      const amount = previousYearAmtPlusInterest; 
+  
+      amountPerYear.push( amount )
+
+    }
+    
   }
 
 
@@ -54,20 +76,21 @@ export default function Home() {
               <input 
                 value={dollarsPerMonth}
                 onChange={(e) => {
-                  setDollarsPerMonth(e.target.value)
+                  setDollarsPerMonth(Number(e.target.value))
                 }}
               />
             </label>
             <div>{dollarsPerMonth}</div>
           </div>
           <div>
+            <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
             <label>
               Interest rate (%):
               <input  
                 value={interestRatePercentage}
                 onChange={(e) => {
-                  setInterestRatePercentage(e.target.value)
-                  setInterestRate(e.target.value / 100)
+                  setInterestRatePercentage(Number(e.target.value))
+                  setInterestRate(Number(e.target.value) / 100)
                 }}
               />
             </label>
@@ -79,7 +102,7 @@ export default function Home() {
               <input  
                 value={lowerAge}
                 onChange={(e) => {
-                  setLowerAge(e.target.value)
+                  setLowerAge(Number(e.target.value))
                   setYearsInvested(upperAge - lowerAge)
                 }}
               />
@@ -87,22 +110,25 @@ export default function Home() {
               <input  
                 value={upperAge}
                 onChange={(e) => {
-                  setUpperAge(e.target.value)
+                  setUpperAge(Number(e.target.value))
                 }}
               />
             </label>
             <div>{yearsInvested} years of investing</div>
           </div>
-          <div>
-            Amount of money at end: {finalAmount}
-          </div>
+
           <div className="columns-3">
             Amount per year: {
               amountPerYear.map((value, index) => {
                 return(
                   <>
                     <div>
-                      Year {index + 1}: {value},
+                      <div>
+                        Year {index + 1}, age {Number(lowerAge) + index + 1}:
+                      </div>
+                      <div>
+                        {Math.floor(value)}
+                      </div>
                     </div>
                   </>
                 )
