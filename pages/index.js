@@ -11,7 +11,7 @@ export default function Home() {
 
   const [dollarsPerMonth, setDollarsPerMonth] = useState(200)
   const [interestRatePercentage, setInterestRatePercentage] = useState(12)
-  const [interestRate, setInterestRate] = useState(interestRatePercentage / 100)
+  const [interestRateDecimal, setInterestRate] = useState(interestRatePercentage / 100)
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(40)
@@ -29,7 +29,7 @@ export default function Home() {
 
   for (let i = 0; i < yearsInvested; i++){
 
-    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
+    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRateDecimal+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
 
     amountPerYear.push( amount )
@@ -39,7 +39,7 @@ export default function Home() {
   // Add on to the array the values for ages where money is no longer being invested
   if (finalAge > upperAge) {
     for (let i = upperAge; i < finalAge; i++){
-      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRate + 1) : 0
+      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRateDecimal + 1) : 0
       const amount = previousYearAmtPlusInterest; 
   
       amountPerYear.push( amount )
@@ -109,20 +109,58 @@ export default function Home() {
           {/* Total Amount Display */}
           <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">Total amount earned by age {finalAge}: ${Math.floor(finalAmount).toLocaleString()}</div>
 
-          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRate).toLocaleString()}</div>
+          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRateDecimal).toLocaleString()}</div>
 
-          <div className="md:columns-3">
+          {/* Display Annual Sums */}
+          <div className="">
             Amount per year: {
-              amountPerYear.map((value, index) => {
+              amountPerYear.map((value, index, array) => {
+                const previousYearAmount = Math.floor(array[index - 1])
+                const previousYearAmountNumber = array[index - 1];
+
+                const currentYearDisplayAmount = Math.floor(value).toLocaleString()
+                const interestAmountOnPreviousYear = Math.floor(interestRateDecimal * previousYearAmountNumber)
+                const amountInvestedThisYear = index < yearsInvested ? 
+                Math.floor(dollarsPerMonth * 12)
+                : 0;
+
                 return(
                   <>
-                    <div className="mb-2">
+                    <div className="mb-8">
                       <div>
                         Year {index + 1}, age {Number(lowerAge) + index + 1}:
                       </div>
-                      <div>
-                        {Math.floor(value)}
+
+                      {/* Total Amount Saved So Far */}
+                      <div className="underline">
+                        ${currentYearDisplayAmount}
                       </div>
+
+                      {/* Breakdown of additions to get to total amount saved */}
+                      {index > 0 && 
+                        <>
+                          <p>
+                            ${amountInvestedThisYear.toLocaleString()} invested this year
+                          </p>
+                          <p>
+                            + previous year&apos;s amount of ${previousYearAmount.toLocaleString()}
+                          </p>
+                          <p>
+                            + interest on previous year&apos;s amount. That&apos;s {interestRatePercentage}% of ${previousYearAmount.toLocaleString()}, which is ${interestAmountOnPreviousYear.toLocaleString()}
+                          </p>
+                          <p>
+                            {/* Calculate sum of investments up to this point & display to user  */}
+                            ${amountInvestedThisYear.toLocaleString()} + ${previousYearAmount.toLocaleString()} + ${interestAmountOnPreviousYear.toLocaleString()} = ${
+                              (
+                                amountInvestedThisYear 
+                                + previousYearAmount
+                                + interestAmountOnPreviousYear
+                              )
+                              .toLocaleString()
+                            }
+                          </p>
+                        </>
+                      }
                     </div>
                   </>
                 )
