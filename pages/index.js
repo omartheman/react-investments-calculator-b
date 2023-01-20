@@ -91,16 +91,30 @@ export default function Home() {
           <div className="text-center">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
 
           <NumberInput
-            labelValue={'Show amounts until age: '}
+            labelValue={'Age I start withdrawing: '}
             defaultValue={finalAge}
             changeEventHandler={setFinalAge}
             inputStyles={inputStyles}
           /> 
 
           {/* Total Amount Display */}
-          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">Total amount earned by age {finalAge}: ${Math.floor(finalAmount).toLocaleString()}</div>
+          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md w-full m-auto">
+            <div className="text-center">
+              Total amount earned by age {finalAge}:
+            </div>
+            <div className="text-center underline">
+              ${Math.floor(finalAmount).toLocaleString()}
+            </div>
+          </div>
 
-          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRateDecimal).toLocaleString()}</div>
+          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md text-center w-full m-auto">
+            <span>
+              The amount of interest I earn on this at {interestRatePercentage}% every month is: 
+            </span>
+            <span className="block underline">
+              ${Math.floor(finalAmount*interestRateDecimal).toLocaleString()}
+            </span>
+          </div>
 
           {/* Display Annual Sums */}
           <div className="">
