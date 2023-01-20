@@ -98,7 +98,7 @@ export default function Home() {
           </div>
           <div>
             <label>
-              Age range invested: from 
+              I&apos;m investing from age{' '} 
               <input  
                 value={lowerAge}
                 onChange={(e) => {
@@ -106,16 +106,30 @@ export default function Home() {
                   setYearsInvested(upperAge - lowerAge)
                 }}
               />
-              to 
+              {' '}to age{' '}
               <input  
                 value={upperAge}
                 onChange={(e) => {
                   setUpperAge(Number(e.target.value))
                 }}
+              />,
+            </label>
+            <div>which makes {yearsInvested} years of investing.</div>
+          </div>
+          <div>
+            <label>
+              Show amounts until age: 
+              <input  
+                value={finalAge}
+                onChange={(e) => {
+                  setFinalAge(Number(e.target.value))
+                }}
               />
             </label>
-            <div>{yearsInvested} years of investing</div>
+            <div>{interestRate}</div>
           </div>
+
+          <div>Total amount earned by age {finalAge}: {Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
 
           <div className="columns-3">
             Amount per year: {
