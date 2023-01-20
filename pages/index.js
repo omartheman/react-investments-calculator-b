@@ -54,10 +54,10 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} p-6`}>
         <div>
-          <h1 className="text-center text-2xl">Investment Calculator</h1>
+          <h1 className="text-center text-2xl mb-4">Investment Calculator</h1>
 
           <NumberInput 
-            labelValue={'Amount invested every month: '}
+            labelValue={'I\'m going to invest this much every month: '}
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
             displayValue={dollarsPerMonth}
@@ -104,7 +104,7 @@ export default function Home() {
           {/* Total Amount Display */}
           <div className="bg-slate-200 text-black p-1 my-4">Total amount earned by age {finalAge}: ${Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
 
-          <div className="columns-3">
+          <div className="md:columns-3">
             Amount per year: {
               amountPerYear.map((value, index) => {
                 return(
