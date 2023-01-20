@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
+import NumberInput from '/components/Input'
  
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,18 +55,14 @@ export default function Home() {
       <main className={styles.main}>
         <div>
           <h1>Investment Calculator</h1>
-          <div>
-            <label>
-              Amount invested every month: 
-              <input 
-                value={dollarsPerMonth}
-                onChange={(e) => {
-                  setDollarsPerMonth(Number(e.target.value))
-                }}
-              />
-            </label>
-            <div>{dollarsPerMonth}</div>
-          </div>
+
+          <NumberInput 
+            defaultValue={dollarsPerMonth}
+            labelValue={"Amount invested every month: "}
+            changeEventHandler={setDollarsPerMonth}
+            displayValue={dollarsPerMonth}
+          />
+
           <div>
             <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
             <label>
