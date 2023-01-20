@@ -107,9 +107,9 @@ export default function Home() {
           /> 
 
           {/* Total Amount Display */}
-          <div className="bg-slate-200 text-black p-1 my-4">Total amount earned by age {finalAge}: ${Math.floor(finalAmount).toLocaleString()}</div>
+          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">Total amount earned by age {finalAge}: ${Math.floor(finalAmount).toLocaleString()}</div>
 
-          <div className="bg-slate-200 text-black p-1 my-4">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRate).toLocaleString()}</div>
+          <div className="bg-slate-200 text-black py-1 px-2 my-4 rounded-md">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRate).toLocaleString()}</div>
 
           <div className="md:columns-3">
             Amount per year: {
