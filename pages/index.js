@@ -25,7 +25,8 @@ export default function Home() {
     setYearsInvested(upperAge - lowerAge)
     setInterestRate(interestRatePercentage / 100)
     setFinalAmount(amountPerYear[amountPerYear.length - 1])
-  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear])
+
+  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge])
 
   for (let i = 0; i < yearsInvested; i++){
 
@@ -65,6 +66,7 @@ export default function Home() {
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
             inputStyles={inputStyles}
+            inputName={'monthly-investment'}
           />
 
           <NumberInput
@@ -72,6 +74,7 @@ export default function Home() {
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
             inputStyles={inputStyles}
+            inputName={'interest-rate'}
           />
           <div className="mt-2 text-center">(The average rate of return of the S&P 500 is ~11.8%)</div>
 
@@ -80,6 +83,7 @@ export default function Home() {
             defaultValue={lowerAge}
             changeEventHandler={setLowerAge}
             inputStyles={inputStyles}
+            inputName={'start-age'}
           />
 
           <NumberInput
@@ -87,6 +91,7 @@ export default function Home() {
             defaultValue={upperAge}
             changeEventHandler={setUpperAge}
             inputStyles={inputStyles}
+            inputName={'end-age'}
           />
           <div className="text-center">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
 
@@ -95,6 +100,7 @@ export default function Home() {
             defaultValue={finalAge}
             changeEventHandler={setFinalAge}
             inputStyles={inputStyles}
+            inputName={'final-age'}
           /> 
 
           {/* Total Amount Display */}
@@ -109,10 +115,19 @@ export default function Home() {
 
           <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md text-center w-full m-auto">
             <span>
-              The amount of interest I earn on this at {interestRatePercentage}% every month is: 
+              The amount of interest I earn on this at {interestRatePercentage}% every year is: 
             </span>
             <span className="block underline">
               ${Math.floor(finalAmount*interestRateDecimal).toLocaleString()}
+            </span>
+          </div>
+
+          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md text-center w-full m-auto">
+            <span>
+              This makes this much per month: 
+            </span>
+            <span className="block underline">
+              ${Math.floor(finalAmount*interestRateDecimal / 12).toLocaleString()}
             </span>
           </div>
 
