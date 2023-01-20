@@ -21,6 +21,7 @@ export default function Home() {
   const [finalAmount, setFinalAmount] = useState(amountPerYear[amountPerYear.length - 1])
   const [taxRateDecimal, setTaxRateDecimal] = useState(0.3)
   const [taxRatePercentage, setTaxRatePercentage] = useState(30) 
+  const [annualIncomeAfterTaxes, setAnnualIncomeAfterTaxes] = useState(); 
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
@@ -29,6 +30,9 @@ export default function Home() {
 
     // Update tax rate 
     setTaxRateDecimal(taxRatePercentage / 100)
+
+    // Update annual income after taxes 
+    setAnnualIncomeAfterTaxes(finalAmount*interestRateDecimal * (1 - taxRateDecimal))
 
   }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage])
 
@@ -81,14 +85,15 @@ export default function Home() {
           />
 
           <NumberInput
-            labelValue={'Start age:'}
+            labelValue={'Age I start investing:'}
             defaultValue={lowerAge}
             changeEventHandler={setLowerAge}
             inputName={'start-age'}
           />
 
           <NumberInput
-            labelValue={'End age:'}
+            labelValue={'Age I stop investing:'}
+            subheading={"(The age you stop putting in your monthly investment)}"}
             defaultValue={upperAge}
             changeEventHandler={setUpperAge}
             inputName={'end-age'}
@@ -114,7 +119,7 @@ export default function Home() {
             /> 
 
             <NumberInput
-              labelValue={'Amount of taxes I will pay on my investment when I withdraw:'}
+              labelValue={'Amount of taxes I will pay on my investment when I withdraw (%):'}
               defaultValue={taxRatePercentage}
               changeEventHandler={setTaxRatePercentage}
               inputName={'final-age'}
@@ -122,10 +127,10 @@ export default function Home() {
 
             <FinalAmount 
               amount={finalAmount*interestRateDecimal * (1 - taxRateDecimal)}
-              text={`After ${taxRateDecimal * 100}% to taxes, I am taking home:`}
+              text={`After ${taxRateDecimal * 100}% to taxes, I am taking home this much per year:`}
             /> 
             <FinalAmount 
-              amount={finalAmount*interestRateDecimal / 12}
+              amount={annualIncomeAfterTaxes / 12}
               text={"This makes this much per month:"}
             /> 
           </div>
