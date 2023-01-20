@@ -5,7 +5,9 @@ import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import NumberInput from '/components/NumberInput'
 import FinalAmount from '@/components/FinalAmount'
- 
+import * as V from 'victory-chart' 
+import { VictoryLabel, VictoryArea, VictoryAxis, VictoryTheme, VictoryChart, VictoryBar } from 'victory'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -55,6 +57,21 @@ export default function Home() {
     }
   }
 
+  const data = [
+    {quarter: 1, earnings: 13000},
+    {quarter: 2, earnings: 16500},
+    {quarter: 3, earnings: 14250},
+    {quarter: 4, earnings: 19000}
+  ];
+
+  const annualData = [
+  ]
+
+  amountPerYear.forEach((value, index, array) => {
+    annualData.push({x: index + lowerAge + 1, y: value})
+    console.log(annualData)
+  })
+
   return (
     <>
       <Head>
@@ -68,6 +85,71 @@ export default function Home() {
         <div>
           <h1 className="text-center text-2xl mb-4 font-light">Investment Calculator</h1>
           <p className="font-extralight text-lg">Calculate the future value of a monthly investment you make for a number of years.</p>
+
+
+        <VictoryChart domainPadding={30}>
+          <VictoryAxis
+            dependentAxis={true}
+            style={{
+              grid: { stroke: "grey" }
+            }}
+          />
+          <VictoryAxis />
+          <VictoryBar
+            barWidth={20}
+            style={{ data: { fill: "red" } }}
+            data={[
+              { x: new Date("2019-01-01"), y: 2 },
+              { x: new Date("2019-02-01"), y: 3 },
+              { x: new Date("2019-03-01"), y: 5 },
+              { x: new Date("2019-04-01"), y: 4 },
+              { x: new Date("2019-05-01"), y: 8 },
+              { x: new Date("2019-06-01"), y: 2 },
+              { x: new Date("2019-07-01"), y: 3 },
+              { x: new Date("2019-08-01"), y: 5 },
+              { x: new Date("2019-09-01"), y: 9 },
+              { x: new Date("2019-10-01"), y: 3 },
+              { x: new Date("2019-11-01"), y: 5 },
+              { x: new Date("2019-12-01"), y: 6 }
+            ]}
+          />
+        </VictoryChart>
+
+          <VictoryChart domainPadding={30}>
+            <VictoryAxis 
+              dependentAxis={true} 
+              style={{ 
+                grid: {
+                  stroke: "grey",
+                }
+              }}
+              tickFormat={(t) => `${t / 1000}k`}
+            />
+            <VictoryAxis crossAxis
+              domain={[lowerAge, finalAge]}
+              theme={VictoryTheme.material}
+              standalone={false}
+            />
+            <VictoryBar 
+              style={{data: {fill: '#b1b1b1'}}}
+              data={annualData}
+            /> 
+            {
+              amountPerYear.map((data, index) => {
+                return(
+                  <VictoryAxis 
+                    dependentAxis={true} 
+                    key={index}
+                    label={`$${Math.floor(data).toLocaleString()}`}
+                    style={{ 
+                      tickLabels: { fill: "none" }
+                    }}
+                    axisValue={data}
+                  />
+                )
+              })
+            }
+          </VictoryChart>
 
           <NumberInput 
             labelValue={'Monthly investment ($): '}
