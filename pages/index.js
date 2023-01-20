@@ -66,14 +66,13 @@ export default function Home() {
 
           <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
 
-
           <NumberInput
             labelValue={'Interest rate (%): '}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
             displayValue={interestRate}
           />
-          
+
           <div>
             <label>
               I&apos;m investing from age{' '} 
@@ -94,18 +93,12 @@ export default function Home() {
             </label>
             <div>which makes {yearsInvested} years of investing.</div>
           </div>
-          <div>
-            <label>
-              Show amounts until age: 
-              <input  
-                value={finalAge}
-                onChange={(e) => {
-                  setFinalAge(Number(e.target.value))
-                }}
-              />
-            </label>
-            <div>{interestRate}</div>
-          </div>
+
+          <NumberInput
+            labelValue={'Show amounts until age: '}
+            defaultValue={finalAge}
+            changeEventHandler={setFinalAge}
+          /> 
 
           <div className="bg-slate-200 text-black p-1">Total amount earned by age {finalAge}: ${Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
 
