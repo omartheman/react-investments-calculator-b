@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import NumberInput from '/components/NumberInput'
+import FinalAmount from '@/components/FinalAmount'
  
 const inter = Inter({ subsets: ['latin'] })
 
@@ -104,31 +105,19 @@ export default function Home() {
           /> 
 
           {/* Total Amount Display */}
-          <div className="bg-slate-200 text-black py-1 px-4 mb-4 mt-14 rounded-md w-full m-auto">
-            <div className="text-center">
-              Total amount earned by age {finalAge}:
-            </div>
-            <div className="text-center underline">
-              ${Math.floor(finalAmount).toLocaleString()}
-            </div>
-          </div>
-
-          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md text-center w-full m-auto">
-            <span>
-              The amount of interest I earn on this at {interestRatePercentage}% every year is: 
-            </span>
-            <span className="block underline">
-              ${Math.floor(finalAmount*interestRateDecimal).toLocaleString()}
-            </span>
-          </div>
-
-          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md text-center w-full m-auto">
-            <span>
-              This makes this much per month: 
-            </span>
-            <span className="block underline">
-              ${Math.floor(finalAmount*interestRateDecimal / 12).toLocaleString()}
-            </span>
+          <div className="mt-14 mb-16">
+            <FinalAmount 
+              amount={finalAmount}
+              text={`Total amount earned by age ${finalAge}:`}
+            /> 
+            <FinalAmount 
+              amount={finalAmount*interestRateDecimal}
+              text={`The amount of interest I earn on this at ${interestRatePercentage}% every year is: `}
+            /> 
+            <FinalAmount 
+              amount={finalAmount*interestRateDecimal / 12}
+              text={"This makes this much per month:"}
+            /> 
           </div>
 
           {/* Display Annual Sums */}
