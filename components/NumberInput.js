@@ -1,6 +1,6 @@
 export default function NumberInput({labelValue, defaultValue, changeEventHandler, displayValue}){
   return (
-    <div>
+    <div className="mt-4">
       <label>
         {labelValue}
         <input 

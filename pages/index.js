@@ -14,15 +14,17 @@ export default function Home() {
   const [interestRate, setInterestRate] = useState(interestRatePercentage / 100)
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
-  const [upperAge, setUpperAge] = useState(65)
-  const [finalAge, setFinalAge] = useState(70)
+  const [upperAge, setUpperAge] = useState(40)
+  const [finalAge, setFinalAge] = useState(65)
+  const amountPerYear = []
+  const [finalAmount, setFinalAmount] = useState(amountPerYear[amountPerYear.length - 1])
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
     setInterestRate(interestRatePercentage / 100)
-  }, [upperAge, lowerAge, interestRatePercentage])
+    setFinalAmount(amountPerYear[amountPerYear.length - 1])
+  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear])
 
-  const amountPerYear = []
   for (let i = 0; i < yearsInvested; i++){
 
     const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRate+1) : 0
@@ -53,8 +55,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} p-6`}>
+
+
         <div>
           <h1 className="text-center text-2xl mb-4">Investment Calculator</h1>
+
+          <button className="bg-slate-100 text-black p-1">Some Tips</button>
 
           <NumberInput 
             labelValue={'I\'m going to invest this much every month: '}
@@ -72,7 +78,7 @@ export default function Home() {
             displayValue={interestRate}
           />
 
-          <div>
+          <div className="mt-4">
             <label>
               I&apos;m investing from age{' '} 
               <input  
@@ -102,7 +108,9 @@ export default function Home() {
           /> 
 
           {/* Total Amount Display */}
-          <div className="bg-slate-200 text-black p-1 my-4">Total amount earned by age {finalAge}: ${Math.floor(amountPerYear[amountPerYear.length - 1])}</div>
+          <div className="bg-slate-200 text-black p-1 my-4">Total amount earned by age {finalAge}: ${Math.floor(finalAmount).toLocaleString()}</div>
+
+          <div className="bg-slate-200 text-black p-1 my-4">The amount of interest I earn on this at {interestRatePercentage}% every month is ${Math.floor(finalAmount*interestRate).toLocaleString()}</div>
 
           <div className="md:columns-3">
             Amount per year: {
