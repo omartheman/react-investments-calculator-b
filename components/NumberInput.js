@@ -11,7 +11,9 @@ export default function NumberInput({labelValue, defaultValue, changeEventHandle
           }}
         />
       </label>
-      <div>{displayValue}</div>
+      {displayValue && 
+        <div>{displayValue}</div>
+      }
     </div>
   )
 }

@@ -63,17 +63,14 @@ export default function Home() {
             labelValue={'I\'m going to invest this much every month: '}
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
-            displayValue={dollarsPerMonth}
           />
-
-          <div>(The average rate of return of the S&P 500 is ~11.8%)</div>
 
           <NumberInput
             labelValue={'Interest rate (%): '}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
-            displayValue={interestRate}
           />
+          <div className="mt-2">(The average rate of return of the S&P 500 is ~11.8%)</div>
 
           <div className="mt-4">
             <label>
