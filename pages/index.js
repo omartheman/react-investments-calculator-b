@@ -71,12 +71,12 @@ export default function Home() {
 
           <NumberInput
             labelValue={'Average interest rate (%): '}
+            subheading={'(The average rate of return of the S&P 500 is ~11.8%)'}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
             inputStyles={inputStyles}
             inputName={'interest-rate'}
           />
-          <div className="mt-2 text-center">(The average rate of return of the S&P 500 is ~11.8%)</div>
 
           <NumberInput
             labelValue={'Start age:'}
@@ -93,7 +93,7 @@ export default function Home() {
             inputStyles={inputStyles}
             inputName={'end-age'}
           />
-          <div className="text-center">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
+          <div className="text-center font-extralight mt-2 text-lg">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
 
           <NumberInput
             labelValue={'Age I start withdrawing: '}
@@ -104,7 +104,7 @@ export default function Home() {
           /> 
 
           {/* Total Amount Display */}
-          <div className="bg-slate-200 text-black py-1 px-4 my-4 rounded-md w-full m-auto">
+          <div className="bg-slate-200 text-black py-1 px-4 mb-4 mt-14 rounded-md w-full m-auto">
             <div className="text-center">
               Total amount earned by age {finalAge}:
             </div>
