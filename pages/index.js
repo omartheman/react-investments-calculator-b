@@ -19,6 +19,8 @@ export default function Home() {
   const amountPerYear = []
   const [finalAmount, setFinalAmount] = useState(amountPerYear[amountPerYear.length - 1])
 
+  const inputStyles = "bg-slate-800 text-white p-2 rounded-md"
+
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
     setInterestRate(interestRatePercentage / 100)
@@ -63,12 +65,14 @@ export default function Home() {
             labelValue={'I\'m going to invest this much every month: '}
             defaultValue={dollarsPerMonth}
             changeEventHandler={setDollarsPerMonth}
+            inputStyles={inputStyles}
           />
 
           <NumberInput
             labelValue={'Interest rate (%): '}
             defaultValue={interestRatePercentage}
             changeEventHandler={setInterestRatePercentage}
+            inputStyles={inputStyles}
           />
           <div className="mt-2">(The average rate of return of the S&P 500 is ~11.8%)</div>
 
@@ -76,7 +80,7 @@ export default function Home() {
             <label>
               I&apos;m investing from age{' '} 
               <input  
-                className="bg-slate-800 text-white"
+                className={inputStyles}
                 value={lowerAge}
                 onChange={(e) => {
                   setLowerAge(Number(e.target.value))
@@ -85,7 +89,7 @@ export default function Home() {
               />
               {' '}to age{' '}
               <input  
-                className="bg-slate-800 text-white"
+                className={inputStyles}
                 value={upperAge}
                 onChange={(e) => {
                   setUpperAge(Number(e.target.value))
@@ -99,6 +103,7 @@ export default function Home() {
             labelValue={'Show amounts until age: '}
             defaultValue={finalAge}
             changeEventHandler={setFinalAge}
+            inputStyles={inputStyles}
           /> 
 
           {/* Total Amount Display */}

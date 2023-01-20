@@ -1,10 +1,10 @@
-export default function NumberInput({labelValue, defaultValue, changeEventHandler, displayValue}){
+export default function NumberInput({labelValue, defaultValue, changeEventHandler, displayValue, inputStyles}){
   return (
     <div className="mt-4">
       <label>
         {labelValue}
         <input 
-          className="bg-slate-800 text-white p-1"
+          className={inputStyles}
           value={defaultValue}
           onChange={(e) => {
             changeEventHandler(Number(e.target.value))
