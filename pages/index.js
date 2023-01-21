@@ -5,8 +5,8 @@ import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import NumberInput from '/components/NumberInput'
 import FinalAmount from '@/components/FinalAmount'
-import * as V from 'victory-chart' 
-import { VictoryLabel, VictoryArea, VictoryAxis, VictoryTheme, VictoryChart, VictoryBar } from 'victory'
+import BarChart from '@/components/BarChart'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -86,42 +86,6 @@ export default function Home() {
           <h1 className="text-center text-2xl mb-4 font-light">Investment Calculator</h1>
           <p className="font-extralight text-lg">Calculate the future value of a monthly investment you make for a number of years.</p>
 
-          <VictoryChart domainPadding={15}>
-            <VictoryAxis 
-              dependentAxis={true} 
-              style={{ 
-                grid: {
-                  stroke: "grey",
-                }
-              }}
-              tickFormat={(t) => `${t / 1000}k`}
-            />
-            <VictoryAxis crossAxis
-              domain={[lowerAge, finalAge]}
-              theme={VictoryTheme.material}
-              standalone={false}
-            />
-            <VictoryBar 
-              style={{data: {fill: '#b1b1b1'}}}
-              data={annualData}
-            /> 
-            {
-              amountPerYear.map((data, index) => {
-                return(
-                  <VictoryAxis 
-                    dependentAxis={true} 
-                    key={index}
-                    label={`$${Math.floor(data).toLocaleString()}`}
-                    style={{ 
-                      tickLabels: { fill: "none" }
-                    }}
-                    axisValue={data}
-                  />
-                )
-              })
-            }
-          </VictoryChart>
-
           <NumberInput 
             labelValue={'Monthly investment ($): '}
             defaultValue={dollarsPerMonth}
@@ -187,6 +151,13 @@ export default function Home() {
               text={"This makes this much per month:"}
             /> 
           </div>
+
+          <BarChart 
+            lowerAge={lowerAge}
+            finalAge={finalAge}
+            annualData={annualData}
+            amountPerYear={amountPerYear}
+          />
 
           {/* Display Annual Sums */}
           <div className="">
