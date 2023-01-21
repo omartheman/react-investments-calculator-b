@@ -38,7 +38,7 @@ export default function Home() {
     // Update annual income after taxes 
     setAnnualIncomeAfterTaxes(finalAmount*interestRateDecimal * (1 - taxRateDecimal))
 
-  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage])
+  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage, finalAmount, interestRateDecimal, taxRateDecimal])
 
   for (let i = 0; i < yearsInvested; i++){
 
