@@ -7,6 +7,7 @@ import NumberInput from '/components/NumberInput'
 import FinalAmount from '@/components/FinalAmount'
 import BarChart from '@/components/BarChart'
 import AnnualSums from '@/components/AnnualSums'
+import MainInputs from '@/components/MainInputs'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -87,42 +88,18 @@ export default function Home() {
           <h1 className="text-center text-2xl mb-4 font-light">Investment Calculator</h1>
           <p className="font-extralight text-lg">Calculate the future value of a monthly investment you make for a number of years.</p>
 
-          <NumberInput 
-            labelValue={'Monthly investment ($): '}
-            defaultValue={dollarsPerMonth}
-            changeEventHandler={setDollarsPerMonth}
-            inputName={'monthly-investment'}
-          />
-
-          <NumberInput
-            labelValue={'Average interest rate (%): '}
-            subheading={'(The average rate of return of the S&P 500 is ~11.8%)'}
-            defaultValue={interestRatePercentage}
-            changeEventHandler={setInterestRatePercentage}
-            inputName={'interest-rate'}
-          />
-
-          <NumberInput
-            labelValue={'Age I start investing:'}
-            defaultValue={lowerAge}
-            changeEventHandler={setLowerAge}
-            inputName={'start-age'}
-          />
-
-          <NumberInput
-            labelValue={'Age I stop investing:'}
-            subheading={"(The age you stop putting in your monthly investment)}"}
-            defaultValue={upperAge}
-            changeEventHandler={setUpperAge}
-            inputName={'end-age'}
-          />
-          <div className="text-center font-extralight mt-6 text-lg">(Total of <span className="underline">{yearsInvested}</span> years of investing.)</div>
-
-          <NumberInput
-            labelValue={'Age I start withdrawing: '}
-            defaultValue={finalAge}
-            changeEventHandler={setFinalAge}
-            inputName={'final-age'}
+          <MainInputs 
+            dollarsPerMonth={dollarsPerMonth} 
+            setDollarsPerMonth={setDollarsPerMonth} 
+            interestRatePercentage={interestRatePercentage} 
+            setInterestRatePercentage={setInterestRatePercentage}
+            lowerAge={lowerAge}
+            setLowerAge={setLowerAge}
+            upperAge={upperAge}
+            setUpperAge={setUpperAge}
+            yearsInvested={yearsInvested}
+            finalAge={finalAge}
+            setFinalAge={setFinalAge}
           /> 
 
           {/* Total Amount Display */}
