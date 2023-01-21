@@ -4,7 +4,6 @@ export default function BarChart({lowerAge, finalAge, annualData, amountPerYear}
   
   return(
     <>
-      <h2>Label</h2>
       <VictoryChart 
         domainPadding={{x: 15, y: 0}}
         theme={{
