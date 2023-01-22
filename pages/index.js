@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import NumberInput from '/components/NumberInput'
 import FinalAmount from '@/components/FinalAmount'
 import BarChart from '@/components/BarChart'
-
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,35 +19,47 @@ export default function Home() {
   
   const interestRateDecimal = interestRatePercentage / 100; 
   const yearsInvested = upperAge - lowerAge
-  const amountPerYear = []
+  let amountPerYear = []
+
+  const amountPerYearPlaceholder = [] 
 
   for (let i = 0; i < yearsInvested; i++){
-
-    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRateDecimal+1) : 0
+    console.log('i: ', i)
+    const previousYearAmtPlusInterest = amountPerYearPlaceholder.length > 0 ? amountPerYearPlaceholder[i - 1] * (interestRateDecimal+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
 
-    amountPerYear.push( amount )
+    amountPerYearPlaceholder.push( amount )
   }
 
-  
+  amountPerYear = amountPerYearPlaceholder
+
   // If final age is greater than upperage, push the difference to arrray 
   // Add on to the array the values for ages where money is no longer being invested
+
   if (finalAge > upperAge) {
+    let amountPerYearPlaceholder2 = amountPerYear
     for (let i = upperAge; i < finalAge; i++){
-      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRateDecimal + 1) : 0
+      console.log('i2: ', i)
+      const previousYearAmtPlusInterest = amountPerYearPlaceholder2.length > 0 ? amountPerYearPlaceholder2[i - lowerAge - 1] * (interestRateDecimal + 1) : 0
       const amount = previousYearAmtPlusInterest; 
   
-      amountPerYear.push( amount )
+      amountPerYearPlaceholder2.push( amount )
     }
+    amountPerYear = amountPerYearPlaceholder2
   }
 
-  const annualData = [
+  let annualData = [
   ]
 
+  const annualDataPlaceholder = []
+
   amountPerYear.forEach((value, index, array) => {
-    annualData.push({x: index + lowerAge + 1, y: value})
+    console.log('i3:', index)
+    annualDataPlaceholder.push({x: index + lowerAge + 1, y: value})
     console.log(annualData)
   })
+
+  annualData = annualDataPlaceholder
 
   const taxRateDecimal = taxRatePercentage / 100; 
   const finalAmount = amountPerYear[amountPerYear.length - 1]; 
