@@ -9,9 +9,10 @@ export default function AmountPerYear({
   return(
     <div className="">
       {/* Display Annual Sums */}
-      <h2>
-        Amount per year: 
+      <h2 className="mb-4">
+        Amount Saved per Year (Breakdown): 
       </h2>
+      <p className="mb-16 text-center">Follow along here to see how the compound interest adds up every year!</p>
       {
         amountPerYear.map((value, index, array) => {
           const previousYearAmount = Math.floor(array[index - 1])
