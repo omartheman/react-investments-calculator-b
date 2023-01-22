@@ -118,48 +118,62 @@ export default function Home() {
             inputName={'final-age'}
           /> 
 
-          {/* Total Amount Display */}
-          <div className="mt-14 mb-16">
-            <FinalAmount 
-              amount={finalAmount}
-              text={`Total amount earned by age ${finalAge}:`}
-            /> 
-            <FinalAmount 
-              amount={finalAmount*interestRateDecimal}
-              text={`My annual income at ${interestRatePercentage}% per year of this total is: `}
-            /> 
+          {
+            // Throw warning message if age is > 110
+            // -- This prevents long load times for calculating high numbers of results and rendering the graph 
+            (upperAge > 110 || finalAge > 110) ? 
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10 text-center mx-auto">
+              <p>
+                Please enter an age lower than 110
+              </p>
+            </div>
+            :
+            <div>
+              {/* Results */}
+              <div className="mt-14 mb-16">
+                {/* Total Amount Display */}
+                <FinalAmount 
+                  amount={finalAmount}
+                  text={`Total amount earned by age ${finalAge}:`}
+                /> 
+                <FinalAmount 
+                  amount={finalAmount*interestRateDecimal}
+                  text={`My annual income at ${interestRatePercentage}% per year of this total is: `}
+                /> 
 
-            <NumberInput
-              labelValue={'Amount of taxes I will pay on my investment when I withdraw (%):'}
-              defaultValue={taxRatePercentage}
-              changeEventHandler={setTaxRatePercentage}
-              inputName={'final-age'}
-            /> 
+                <NumberInput
+                  labelValue={'Amount of taxes I will pay on my investment when I withdraw (%):'}
+                  defaultValue={taxRatePercentage}
+                  changeEventHandler={setTaxRatePercentage}
+                  inputName={'final-age'}
+                /> 
 
-            <FinalAmount 
-              amount={finalAmount*interestRateDecimal * (1 - taxRateDecimal)}
-              text={`After ${taxRateDecimal * 100}% to taxes, I am taking home this much per year:`}
-            /> 
-            <FinalAmount 
-              amount={annualIncomeAfterTaxes / 12}
-              text={"This makes this much per month:"}
-            /> 
-          </div>
+                <FinalAmount 
+                  amount={finalAmount*interestRateDecimal * (1 - taxRateDecimal)}
+                  text={`After ${taxRateDecimal * 100}% to taxes, I am taking home this much per year:`}
+                /> 
+                <FinalAmount 
+                  amount={annualIncomeAfterTaxes / 12}
+                  text={"This makes this much per month:"}
+                /> 
+              </div>
 
-          <BarChart 
-            lowerAge={lowerAge}
-            finalAge={finalAge}
-            annualData={annualData}
-            amountPerYear={amountPerYear}
-          />
+              <BarChart 
+                lowerAge={lowerAge}
+                finalAge={finalAge}
+                annualData={annualData}
+                amountPerYear={amountPerYear}
+              />
 
-          <AmountPerYear 
-            amountPerYear={amountPerYear} 
-            interestRatePercentage={interestRatePercentage}
-            yearsInvested={yearsInvested}
-            dollarsPerMonth={dollarsPerMonth}
-            lowerAge={lowerAge}
-          /> 
+              <AmountPerYear 
+                amountPerYear={amountPerYear} 
+                interestRatePercentage={interestRatePercentage}
+                yearsInvested={yearsInvested}
+                dollarsPerMonth={dollarsPerMonth}
+                lowerAge={lowerAge}
+              /> 
+            </div>
+          }
           
         </div>
         <div>
