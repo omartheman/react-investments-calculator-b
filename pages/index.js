@@ -19,11 +19,7 @@ export default function Home() {
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(40)
   const [finalAge, setFinalAge] = useState(65) //hook 7
-  const amountPerYear = []
   const [taxRatePercentage, setTaxRatePercentage] = useState(30) 
-
-
-
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
@@ -32,9 +28,10 @@ export default function Home() {
 
     // Update annual income after taxes 
 
-  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage, interestRateDecimal])
+  }, [upperAge, lowerAge, interestRatePercentage, finalAge, taxRatePercentage, interestRateDecimal])
 
 
+  const amountPerYear = []
 
   for (let i = 0; i < yearsInvested; i++){
 
@@ -56,11 +53,6 @@ export default function Home() {
     }
   }
 
-  const taxRateDecimal = taxRatePercentage / 100; 
-  const finalAmount = amountPerYear[amountPerYear.length - 1]; 
-  const annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
-
-
   const annualData = [
   ]
 
@@ -68,6 +60,10 @@ export default function Home() {
     annualData.push({x: index + lowerAge + 1, y: value})
     console.log(annualData)
   })
+
+  const taxRateDecimal = taxRatePercentage / 100; 
+  const finalAmount = amountPerYear[amountPerYear.length - 1]; 
+  const annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
 
   return (
     <>
