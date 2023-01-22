@@ -9,7 +9,10 @@ export default function AmountPerYear({
   return(
     <div className="">
       {/* Display Annual Sums */}
-      Amount per year: {
+      <h2 className="text-center mt-20 mb-10 text-2xl">
+        Amount per year: 
+      </h2>
+      {
         amountPerYear.map((value, index, array) => {
           const previousYearAmount = Math.floor(array[index - 1])
           const previousYearAmountNumber = array[index - 1];
@@ -22,7 +25,7 @@ export default function AmountPerYear({
 
           return(
             <>
-              <div className="mb-8">
+              <div className="mb-8 flex flex-col items-center">
                 <div>
                   Year {index + 1}, age {Number(lowerAge) + index + 1}:
                 </div>
@@ -33,9 +36,9 @@ export default function AmountPerYear({
                 </div>
 
                 {/* Breakdown of additions to get to total amount saved */}
-                {index > 0 && 
-                  <>
-                    <div>
+                  <div className="flex flex-col items-center mb-6">
+                  {index > 0 && 
+                    <>
                       <p className={`${index < yearsInvested ?
                           "bg-green-300 text-black"
                           : "bg-blue-200 text-black"
@@ -59,9 +62,9 @@ export default function AmountPerYear({
                           .toLocaleString()
                         }
                       </p>
-                    </div>
-                  </>
-                }
+                    </>
+                  }
+                  </div>
               </div>
             </>
           )
