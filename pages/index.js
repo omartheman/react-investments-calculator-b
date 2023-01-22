@@ -14,7 +14,6 @@ export default function Home() {
 
   const [dollarsPerMonth, setDollarsPerMonth] = useState(200)
   const [interestRatePercentage, setInterestRatePercentage] = useState(12)
-  const [interestRateDecimal, setInterestRate] = useState(interestRatePercentage / 100)
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(40)
@@ -27,20 +26,19 @@ export default function Home() {
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
-    setInterestRate(interestRatePercentage / 100)
     setFinalAmount(amountPerYear[amountPerYear.length - 1])
 
     // Update tax rate 
     setTaxRateDecimal(taxRatePercentage / 100)
 
     // Update annual income after taxes 
-    setAnnualIncomeAfterTaxes(finalAmount*interestRateDecimal * (1 - taxRateDecimal))
+    setAnnualIncomeAfterTaxes(finalAmount*interestRatePercentage / 100 * (1 - taxRateDecimal))
 
   }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage])
 
   for (let i = 0; i < yearsInvested; i++){
 
-    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRateDecimal+1) : 0
+    const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - 1] * (interestRatePercentage / 100+1) : 0
     const amount = dollarsPerMonth * 12 + previousYearAmtPlusInterest; 
 
     amountPerYear.push( amount )
@@ -50,13 +48,13 @@ export default function Home() {
   // Add on to the array the values for ages where money is no longer being invested
   if (finalAge > upperAge) {
     for (let i = upperAge; i < finalAge; i++){
-      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRateDecimal + 1) : 0
+      const previousYearAmtPlusInterest = amountPerYear.length > 0 ? amountPerYear[i - lowerAge - 1] * (interestRatePercentage / 100 + 1) : 0
       const amount = previousYearAmtPlusInterest; 
   
       amountPerYear.push( amount )
     }
   }
-  
+
   const annualData = [
   ]
 
@@ -124,7 +122,7 @@ export default function Home() {
               text={`Total amount earned by age ${finalAge}:`}
             /> 
             <FinalAmount 
-              amount={finalAmount*interestRateDecimal}
+              amount={finalAmount*interestRatePercentage / 100}
               text={`My annual income at ${interestRatePercentage}% per year of this total is: `}
             /> 
 
@@ -136,7 +134,7 @@ export default function Home() {
             /> 
 
             <FinalAmount 
-              amount={finalAmount*interestRateDecimal * (1 - taxRateDecimal)}
+              amount={finalAmount*interestRatePercentage / 100 * (1 - taxRateDecimal)}
               text={`After ${taxRateDecimal * 100}% to taxes, I am taking home this much per year:`}
             /> 
             <FinalAmount 
@@ -160,7 +158,7 @@ export default function Home() {
                 const previousYearAmountNumber = array[index - 1];
 
                 const currentYearDisplayAmount = Math.floor(value).toLocaleString()
-                const interestAmountOnPreviousYear = Math.floor(interestRateDecimal * previousYearAmountNumber)
+                const interestAmountOnPreviousYear = Math.floor(interestRatePercentage / 100 * previousYearAmountNumber)
                 const amountInvestedThisYear = index < yearsInvested ? 
                 Math.floor(dollarsPerMonth * 12)
                 : 0;
