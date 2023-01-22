@@ -35,7 +35,6 @@ export default function Home() {
   }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage, interestRateDecimal])
 
 
-  const taxRateDecimal = taxRatePercentage / 100; 
 
   for (let i = 0; i < yearsInvested; i++){
 
@@ -45,8 +44,6 @@ export default function Home() {
     amountPerYear.push( amount )
   }
 
-  const finalAmount = amountPerYear[amountPerYear.length - 1]; 
-  const annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
   
   // If final age is greater than upperage, push the difference to arrray 
   // Add on to the array the values for ages where money is no longer being invested
@@ -59,6 +56,10 @@ export default function Home() {
     }
   }
 
+  const taxRateDecimal = taxRatePercentage / 100; 
+  const finalAmount = amountPerYear[amountPerYear.length - 1]; 
+  const annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
+  
   const data = [
     {quarter: 1, earnings: 13000},
     {quarter: 2, earnings: 16500},
