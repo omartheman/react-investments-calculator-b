@@ -14,21 +14,21 @@ export default function Home() {
 
   const [dollarsPerMonth, setDollarsPerMonth] = useState(200)
   const [interestRatePercentage, setInterestRatePercentage] = useState(12)
-  const [interestRateDecimal, setInterestRate] = useState(interestRatePercentage / 100)
   const [yearsInvested, setYearsInvested] = useState(0)
   const [lowerAge, setLowerAge] = useState(30)
   const [upperAge, setUpperAge] = useState(40)
   const [finalAge, setFinalAge] = useState(65) //hook 7
   const [taxRatePercentage, setTaxRatePercentage] = useState(30) 
+  
+  const interestRateDecimal = interestRatePercentage / 100; 
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
-    setInterestRate(interestRatePercentage / 100)
 
 
     // Update annual income after taxes 
 
-  }, [upperAge, lowerAge, interestRatePercentage, finalAge, taxRatePercentage, interestRateDecimal])
+  }, [upperAge, lowerAge, interestRatePercentage, finalAge, taxRatePercentage])
 
 
   const amountPerYear = []
