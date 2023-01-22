@@ -129,6 +129,7 @@ export default function Home() {
             </div>
             :
             <div>
+              <h2>Results</h2>
               {/* Results */}
               <div className="mt-14 mb-16">
                 {/* Total Amount Display */}
@@ -136,9 +137,16 @@ export default function Home() {
                   amount={finalAmount}
                   text={`Total amount earned by age ${finalAge}:`}
                 /> 
+
+                <div className="mt-14">
+                  <FinalAmount 
+                    amount={((upperAge - lowerAge) * dollarsPerMonth * 12)}
+                    text={`Total amount you put in:`}
+                  /> 
+                </div>
                 <FinalAmount 
                   amount={finalAmount*interestRateDecimal}
-                  text={`My annual income at ${interestRatePercentage}% per year of this total is: `}
+                  text={`Annual income at ${interestRatePercentage}% per year of $${Math.floor(finalAmount).toLocaleString()} is: `}
                 /> 
 
                 <NumberInput
