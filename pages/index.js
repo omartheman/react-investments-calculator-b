@@ -20,23 +20,22 @@ export default function Home() {
   const [upperAge, setUpperAge] = useState(40)
   const [finalAge, setFinalAge] = useState(65) //hook 7
   const amountPerYear = []
-  const [finalAmount, setFinalAmount] = useState(amountPerYear[amountPerYear.length - 1])  // hook 8
   const [taxRatePercentage, setTaxRatePercentage] = useState(30) 
 
-  const taxRateDecimal = taxRatePercentage / 100; 
-  let annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
 
 
 
   useEffect(() => {
     setYearsInvested(upperAge - lowerAge)
     setInterestRate(interestRatePercentage / 100)
-    setFinalAmount(amountPerYear[amountPerYear.length - 1])
 
 
     // Update annual income after taxes 
 
-  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage, finalAmount, interestRateDecimal, taxRateDecimal])
+  }, [upperAge, lowerAge, interestRatePercentage, amountPerYear, finalAge, taxRatePercentage, interestRateDecimal])
+
+
+  const taxRateDecimal = taxRatePercentage / 100; 
 
   for (let i = 0; i < yearsInvested; i++){
 
@@ -45,6 +44,9 @@ export default function Home() {
 
     amountPerYear.push( amount )
   }
+
+  const finalAmount = amountPerYear[amountPerYear.length - 1]; 
+  const annualIncomeAfterTaxes = finalAmount*interestRateDecimal * (1 - taxRateDecimal); 
   
   // If final age is greater than upperage, push the difference to arrray 
   // Add on to the array the values for ages where money is no longer being invested
