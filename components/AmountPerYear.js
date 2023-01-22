@@ -9,7 +9,7 @@ export default function AmountPerYear({
   return(
     <div className="">
       {/* Display Annual Sums */}
-      <h2 className="text-center mt-20 mb-10 text-2xl">
+      <h2>
         Amount per year: 
       </h2>
       {

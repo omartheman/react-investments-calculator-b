@@ -1,6 +1,6 @@
 export default function NumberInput({labelValue, defaultValue, changeEventHandler, displayValue, inputStyles, inputName, subheading}){
   return (
-    <div className="mt-6">
+    <div className="mt-12">
       <label 
         className="block text-center mb-1 text-xl font-extralight"
         for={inputName}
