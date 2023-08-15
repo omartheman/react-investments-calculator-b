@@ -145,6 +145,10 @@ export default function Home() {
                   /> 
                 </div>
                 <FinalAmount 
+                  amount={finalAmount - ((upperAge - lowerAge) * dollarsPerMonth * 12)}
+                  text={`Total interest earned:`}
+                /> 
+                <FinalAmount 
                   amount={finalAmount*interestRateDecimal}
                   text={`Annual income at ${interestRatePercentage}% per year of $${Math.floor(finalAmount).toLocaleString()} is: `}
                 /> 
